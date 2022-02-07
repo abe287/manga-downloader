@@ -63,6 +63,11 @@ def main():
             chapter_details = readm.getChapterDetails(chapter)
             title, image_links = chapter_details['title'], chapter_details['image_links']
 
+            #remove bad characters from title (folder name)
+            bad_characters = ['<', '>',':','"','/','\\','|','?','*']
+            for character in bad_characters: 
+                title = title.replace(character, "")
+
             #Download the images of each chapter to its own folder
             for i, image in enumerate(image_links):
                 readm.downloadImage(image, title, output, i)
